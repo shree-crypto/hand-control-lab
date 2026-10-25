@@ -1,0 +1,4 @@
+# Use Python 3.12 x64 on Windows. Tasks API; no legacy mp.solutions dependency.
+mediapipe==0.10.21
+opencv-contrib-python==4.11.0.86
+numpy==1.26.4

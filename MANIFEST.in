@@ -1,0 +1,22 @@
+include LICENSE
+include README.md
+include requirements.txt
+include pyproject.toml
+include *.bat
+recursive-include gesture_control *.py
+recursive-include tools *.py
+recursive-include docs *.md
+recursive-include tests test_*.py
+prune .git
+prune .venv
+prune build
+prune dist
+prune data
+prune models
+global-exclude __pycache__
+global-exclude *.py[cod]
+global-exclude *.task
+global-exclude *.download
+
+include NOTICE
+recursive-include LICENSES *.txt

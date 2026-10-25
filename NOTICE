@@ -1,0 +1,11 @@
+Hand Control Lab
+Copyright (c) 2026 Hand Control contributors
+
+Current project source is licensed under GPL-3.0-only. See LICENSE.
+Earlier versions were released under MIT; their original notice is preserved
+in LICENSES/MIT-legacy.txt and the Git history.
+
+Third-party packages, model weights and optional SDKs retain their own licenses.
+The source repository does not include model weights or optional vendor SDKs.
+Research references identify prior work; referenced repository code is not
+incorporated solely by citation.

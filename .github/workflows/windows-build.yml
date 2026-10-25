@@ -1,0 +1,49 @@
+name: Build Windows application
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "gesture_control/**"
+      - "packaging/**"
+      - "requirements*.txt"
+      - "tools/download_model.py"
+      - "tests/**"
+      - ".github/workflows/windows-build.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          architecture: "x64"
+      - name: Build, test and package
+        shell: pwsh
+        run: |
+          $python = (Get-Command python.exe).Source
+          ./packaging/build-windows.ps1 -Python $python
+      - name: Upload installer, portable app and smoke report
+        uses: actions/upload-artifact@v4
+        with:
+          name: HandControl-windows-x64
+          if-no-files-found: error
+          path: |
+            dist/installer/HandControl-Setup.exe
+            dist/HandControl-windows-x64.zip
+            dist/self-test.json
+      - name: Upload diagnostic logs after failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-build-diagnostics
+          if-no-files-found: ignore
+          path: |
+            build/HandControl/warn-HandControl.txt
+            dist/self-test.json

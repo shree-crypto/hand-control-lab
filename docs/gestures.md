@@ -1,0 +1,11 @@
+# Command wheel and personal pose lab
+
+Run `python -m gesture_control gestures`. Hold your **left palm open** for 0.35 seconds to reveal a six-command wheel. Move your right index fingertip into a segment and pinch thumb/index once to confirm. Open the pinch to select again. Returning near the center selects nothing. Commands display a sandbox message only: they do not press keys, change applications, or edit a 3D scene.
+
+Run `python -m gesture_control gestures --record --label open-palm` to enable explicit static-pose recording. Show your right hand and tap **R** for each sample. Capture varied examples, then restart with another label, for example `--label fist`. All labels use the same local file, by default `~/.hand-control/poses.json`; change it with `--data PATH`. **No video is recorded.** Only normalized 21-point landmark features, class labels and a session identifier are stored. Samples are saved immediately with an atomic file replacement. There are size, sample-count and label checks.
+
+Press **T** to build a small nearest-centroid classifier from the saved data. It requires at least three samples for each of two or more labels. This minimum just makes the experiment runnable; collect more diverse examples for useful recognition. Distant or ambiguous observations return **Unknown**. The interface reports the predicted label, not an accuracy score. Training is in memory; saved samples can be loaded and trained again next launch.
+
+Normalization removes translation and uniform scale, but preserves orientation. This is a simple original static-pose classifier, not MediaPipe Model Maker and not a trained temporal movement recognizer. A swipe or circle movement needs a sequence classifier or dedicated motion logic and is not learned here. To evaluate accuracy, reserve entire later recording sessions for testing; adjacent video frames are nearly duplicates and would give misleading results if randomly split between train/test.
+
+Press **Esc** or **Q** to quit through the common runtime. Camera/model requirements are the same as the other RGB hand experiments. Neither UI behavior nor recognition accuracy has been verified on the user's camera in this workspace.

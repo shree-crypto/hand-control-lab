@@ -1,0 +1,3 @@
+# Optional live MIDI transport; .mid file export needs no additional packages.
+mido==1.3.3
+python-rtmidi>=1.5.8,<2

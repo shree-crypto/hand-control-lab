@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hand-control-lab"
+version = "0.3.1"
+description = "Local Windows webcam hand control and experimental gesture, gaze, and MIDI playgrounds"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Sound/Audio :: MIDI",
+]
+dependencies = [
+    "mediapipe==0.10.21",
+    "opencv-contrib-python==4.11.0.86",
+    "numpy==1.26.4",
+]
+
+[project.urls]
+Repository = "https://github.com/shree-crypto/hand-control-lab"
+
+[project.optional-dependencies]
+midi = ["mido==1.3.3", "python-rtmidi>=1.5.8,<2"]
+build = ["PyInstaller>=6.11,<7"]
+
+[project.scripts]
+hand-control = "gesture_control.desktop_entry:main"
+hand-control-cli = "gesture_control.__main__:main"
+
+[project.gui-scripts]
+hand-control-gui = "gesture_control.desktop_entry:main"
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["gesture_control", "gesture_control.*"]
+exclude = ["tests", "tests.*"]
+namespaces = false
+
+[tool.setuptools.data-files]
+"share/doc/hand-control-lab" = ["README.md", "LICENSE", "NOTICE", "docs/*.md"]
+"share/doc/hand-control-lab/LICENSES" = ["LICENSES/*.txt"]
